@@ -9,7 +9,7 @@ export class User {
   @Column('varchar')
   username: string;
 
-  @ManyToOne(() => City, { nullable: false })
+  @ManyToOne(() => City, { nullable: false, eager: true })
   @JoinColumn({ name: 'sellAdressCityId' })
   sellAdressCity: City;
 }

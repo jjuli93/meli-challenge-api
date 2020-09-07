@@ -8,7 +8,6 @@
   },
   "scripts": {
     "build": "tsc",
-    "console": "tsc && node --experimental-repl-await ./dist/console.js",
     "cover": "npm run test-basic -- --coverage",
     "lint": "tsc --noEmit && eslint \"*/**/*.ts\"",
     "lint-diff": "git diff --name-only --cached --relative | grep \\\\.ts$ | xargs eslint",
@@ -36,7 +35,6 @@
   "jest": {
     "collectCoverageFrom": [
       "**/*.ts",
-      "!**/console.js",
       "!**/node_modules/**",
       "!**/build/**",
       "!**/migrations/**",

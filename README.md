@@ -15,7 +15,6 @@ Example base for typescript projects
   + [Logging](#logging)
   + [Testing](#testing)
   + [Debugging](#debugging)
-  + [REPL console](#repl-console)
   + [Documentation](#documentation)
 * [Deploy](#deploy)
   + [Heroku](#heroku)
@@ -165,6 +164,3 @@ In VSCode, you will need to add an `./.vscode/launch.json` file in order to laun
   ]
 }
 ```
-
-### REPL console
-We can use a node console with `npm run console`. There your service objects are exposed as _servicename_ + "Service". Let's suppose that we have a service `users` which has a function `getAll`. In your console you can call `usersService.getAll()` and see the result. Note that this works also with functions that return promises! To exit the console use `.exit`.

@@ -47,7 +47,6 @@ module.exports = {
     "@typescript-eslint/class-name-casing": ["error", { "allowUnderscorePrefix": true }],
     "@typescript-eslint/consistent-type-assertions": "error",
     "@typescript-eslint/consistent-type-definitions": ["error", "interface"],
-    "@typescript-eslint/explicit-function-return-type": "error",
     "@typescript-eslint/func-call-spacing": "error",
     "@typescript-eslint/indent": ["error", 2],
     "@typescript-eslint/interface-name-prefix": "off",

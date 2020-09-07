@@ -33,19 +33,19 @@ export class Product {
   @Column('varchar')
   description: string;
 
-  @ManyToOne(() => Condition, { nullable: false })
+  @ManyToOne(() => Condition, { nullable: false, eager: true })
   @JoinColumn({ name: 'conditionId' })
   condition: Condition;
 
-  @ManyToOne(() => Currency, { nullable: false })
+  @ManyToOne(() => Currency, { nullable: false, eager: true })
   @JoinColumn({ name: 'currencyId' })
   currency: Currency;
 
-  @ManyToOne(() => User, { nullable: false })
+  @ManyToOne(() => User, { nullable: false, eager: true })
   @JoinColumn({ name: 'userId' })
   user: User;
 
-  @ManyToOne(() => Category, { nullable: false })
+  @ManyToOne(() => Category, { nullable: false, eager: true })
   @JoinColumn({ name: 'categoryId' })
   category: Category;
 }
