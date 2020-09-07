@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { City } from './city';
 
 @Entity({ name: 'User' })
 export class User {
@@ -7,4 +8,8 @@ export class User {
 
   @Column('varchar')
   username: string;
+
+  @ManyToOne(() => City, { nullable: false })
+  @JoinColumn({ name: 'sellAdressCityId' })
+  sellAdressCity: City;
 }
