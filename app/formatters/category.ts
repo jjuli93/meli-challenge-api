@@ -1,6 +1,6 @@
 import { Category } from '../../app/models/category';
 
-export const formatCategoryAsArray = (category: Category): string[] => {
+export const formatCategoryAsArray = (category: Category | null): string[] => {
   const categories: string[] = [];
 
   const addCategoryToArray = (categoryToAdd: Category): void => {
@@ -10,6 +10,8 @@ export const formatCategoryAsArray = (category: Category): string[] => {
     }
   };
 
-  addCategoryToArray(category);
-  return categories;
+  if (category) {
+    addCategoryToArray(category);
+  }
+  return categories.reverse();
 };

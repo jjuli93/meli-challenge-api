@@ -1,6 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Tree, TreeParent } from 'typeorm';
 
 @Entity({ name: 'Category' })
+@Tree('materialized-path')
 export class Category {
   @PrimaryGeneratedColumn()
   id: number;
@@ -10,5 +11,6 @@ export class Category {
 
   @ManyToOne(() => Category, { nullable: true })
   @JoinColumn({ name: 'parentCategoryId' })
-  parentCategory: Category;
+  @TreeParent()
+  parentCategory: Category | null;
 }
