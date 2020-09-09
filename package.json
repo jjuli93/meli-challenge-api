@@ -1,7 +1,7 @@
 {
-  "name": "typescript-base",
+  "name": "meli-challenge-api",
   "version": "0.1.0",
-  "description": "Example base for typescript projects",
+  "description": "Meli challenge api",
   "engines": {
     "node": "10.14.1",
     "npm": "6.4.1"

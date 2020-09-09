@@ -1,7 +1,3 @@
-# typescript-base
-
-Example base for typescript projects
-
 ## Table of contents
 * [First steps](#first-steps)
   + [Installing node](#installing-node)
