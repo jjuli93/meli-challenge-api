@@ -3,44 +3,54 @@ import { NextFunction, Request, Response } from 'express';
 import { Raw } from 'typeorm';
 import productsService from '../services/products';
 import { notFoundError } from '../errors';
-import { Product } from '../../app/models/product';
 import { formatProductListItem, formatProductDetail } from '../../app/formatters/product';
 import { author } from '../../app/constants/author';
 import { getCategoryTree } from '../../app/services/category';
 import { getMostRepeatedCategory } from '../../app/utils/category';
 import { formatCategoryAsArray } from '../../app/formatters/category';
 
-export function getProducts(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
-  // TODO: remove the limit when pagination is implemented
-  const { search = '' } = req.query;
-  return productsService
-    .findAll({ take: 4, where: { title: Raw((alias: string) => `${alias} ILIKE '%${search}%'`) } })
-    .then(async (products: Product[]) => {
-      const mostRepeatedCategory = getMostRepeatedCategory(products);
-      const categoryTree = mostRepeatedCategory ? await getCategoryTree(mostRepeatedCategory) : null;
+export async function getProducts(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
+  try {
+    // TODO: remove the limit when pagination is implemented
+    const { search = '' } = req.query;
 
-      res.send({
-        author,
-        categories: formatCategoryAsArray(categoryTree),
-        items: formatProductListItem(products)
-      });
-    })
-    .catch(next);
+    const products = await productsService.findAll({
+      take: 4,
+      where: { title: Raw((alias: string) => `${alias} ILIKE '%${search}%'`) }
+    });
+
+    const mostRepeatedCategory = getMostRepeatedCategory(products);
+    const categoryTree = mostRepeatedCategory ? await getCategoryTree(mostRepeatedCategory) : null;
+
+    return res.send({
+      author,
+      categories: formatCategoryAsArray(categoryTree),
+      items: formatProductListItem(products)
+    });
+  } catch (error) {
+    return next(error);
+  }
 }
 
-export function getProductById(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
-  return productsService
-    .findProduct({ id: parseInt(req.params.id) })
-    .then(async (product: Product) => {
-      if (!product) {
-        throw notFoundError('Product not found');
-      }
-      const categoryTree = await getCategoryTree(product.category);
-      product.category = categoryTree;
-      return res.send({
-        author,
-        item: formatProductDetail(product)
-      });
-    })
-    .catch(next);
+export async function getProductById(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<Response | void> {
+  try {
+    const product = await productsService.findProduct({ id: parseInt(req.params.id) });
+
+    if (!product) {
+      throw notFoundError('Product not found');
+    }
+
+    const categoryTree = await getCategoryTree(product.category);
+    product.category = categoryTree;
+    return res.send({
+      author,
+      item: formatProductDetail(product)
+    });
+  } catch (error) {
+    return next(error);
+  }
 }
