@@ -20,8 +20,7 @@ export async function getExternalProducts(
   try {
     const { search = '' } = req.query;
     const response = await mercadolibreApi.getProducts(search);
-    // TODO: remove the limit when pagination is implemented
-    const products = response.data.results.slice(0, 4);
+    const products = response.data.results;
     const formattedProducts = products.map(formatApiProductListItem);
 
     const categories = products.map((product: Product) => product.category_id);
