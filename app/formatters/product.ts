@@ -28,7 +28,6 @@ export const formatProductDetail = (product: Product) => ({
   condition: product.condition.name,
   freeShipping: product.freeShipping,
   soldQuantity: product.soldQuantity,
-  stockQuantiry: product.stockQuantity,
   description: product.description,
   categories: formatCategoryAsArray(product.category)
 });

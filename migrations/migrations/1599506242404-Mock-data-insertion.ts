@@ -29,10 +29,10 @@ const categories = [
 
 const currencies = [
   {
-    code: 'usd'
+    code: 'USD'
   },
   {
-    code: 'ars'
+    code: 'ARS'
   }
 ];
 

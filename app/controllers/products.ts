@@ -16,7 +16,8 @@ export async function getProducts(req: Request, res: Response, next: NextFunctio
 
     const products = await productsService.findAll({
       take: 4,
-      where: { title: Raw((alias: string) => `${alias} ILIKE '%${search}%'`) }
+      where: { title: Raw((alias: string) => `${alias} ILIKE '%${search}%'`) },
+      order: { soldQuantity: 'DESC' }
     });
 
     const mostRepeatedCategory = getMostRepeatedCategory(products);

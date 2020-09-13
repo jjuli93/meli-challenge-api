@@ -40,6 +40,7 @@ module.exports = {
     "new-cap": "off",
     "semi": "off",
     "class-methods-use-this": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-inferrable-types": "off",
     "@typescript-eslint/array-type": ["error", { "default": "array"}],
     "@typescript-eslint/brace-style": ["error","1tbs", { "allowSingleLine": true }],

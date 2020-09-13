@@ -2,8 +2,8 @@
 import { inspect } from 'util';
 import { Request, Response, NextFunction } from 'express';
 
+import { HTTP_CODES } from '../../app/constants/http-status-codes';
 import logger from '../logger';
-import { HTTP_CODES } from '../constants';
 
 const DEFAULT_STATUS_CODE = HTTP_CODES.INTERNAL_SERVER_ERROR;
 
