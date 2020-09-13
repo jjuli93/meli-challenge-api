@@ -12,11 +12,11 @@ import { formatCategoryAsArray } from '../../app/formatters/category';
 export async function getProducts(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
   try {
     // TODO: remove the limit when pagination is implemented
-    const { search = '' } = req.query;
+    const { q = '' } = req.query;
 
     const products = await productsService.findAll({
       take: 4,
-      where: { title: Raw((alias: string) => `${alias} ILIKE '%${search}%'`) },
+      where: { title: Raw((alias: string) => `${alias} ILIKE '%${q}%'`) },
       order: { soldQuantity: 'DESC' }
     });
 

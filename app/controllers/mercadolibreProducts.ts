@@ -18,8 +18,8 @@ export async function getExternalProducts(
   next: NextFunction
 ): Promise<Response | void> {
   try {
-    const { search = '' } = req.query;
-    const response = await mercadolibreApi.getProducts(search);
+    const { q = '' } = req.query;
+    const response = await mercadolibreApi.getProducts(q);
     const products = response.data.results;
     const formattedProducts = products.map(formatApiProductListItem);
 
