@@ -9,6 +9,8 @@ import {
   formatCategoryPath
 } from '../formatters/mercadolibreProducts';
 import { getMostRepeatedItem } from '../../app/utils/array';
+import { HTTP_CODES } from '../../app/constants/http-status-codes';
+import { notFoundError } from '../../app/errors';
 
 export async function getExternalProducts(
   req: Request,
@@ -53,7 +55,9 @@ export async function getExternalProductById(
       item: formatApiProductDetail(productResponse[0].data, productResponse[1].data, categoryResponse.data)
     });
   } catch (error) {
-    console.log(error.response.data);
-    return next(error);
+    if (error.response.data.status === HTTP_CODES.NOT_FOUND) {
+      return next(notFoundError('product not found'));
+    }
+    return next(error.response.data);
   }
 }
