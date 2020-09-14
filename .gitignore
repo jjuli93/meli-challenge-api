@@ -45,9 +45,6 @@ node_modules
 # Code coverage
 ./coverage
 
-# dotenv
-.env
-
 # VS Code
 .vscode/
 
